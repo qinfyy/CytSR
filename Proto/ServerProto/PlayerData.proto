@@ -1,0 +1,138 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Proto.Server";
+
+message PlayerBasicData {
+	uint32 level = 1;
+	uint32 exp = 2;
+	string nickname = 3;
+	uint32 login_times = 4;
+	uint32 world_level = 5;
+	uint32 stamina = 6;
+	uint64 created_timestamp = 7;
+	uint64 last_login_timestamp = 8;
+}
+
+message AvatarSkillTreeData {
+	uint32 point_id = 1;
+	uint32 level = 2;
+}
+
+message PathInfo {
+	uint32 path_id = 1;
+	uint32 rank = 2;
+	uint32 equipment_unique_id = 3;
+	map<uint32, uint32> relic_maps = 4;
+	repeated AvatarSkillTreeData skill_tree_list = 5;
+	uint32 skin = 6;
+}
+
+message AvatarData {
+	int32 avatar_type = 1;
+	uint32 avatar_id = 2;
+	uint32 level = 3;
+	uint32 exp = 4;
+	uint32 promotion = 5;
+	uint32 rank = 6;
+	uint64 first_met_time_stamp = 7;
+	repeated AvatarSkillTreeData skill_tree_list = 8;
+	uint32 equipment_unique_id = 9;
+	map<uint32, uint32> relic_maps = 10;
+	map<uint32, PathInfo> path_infoes = 11;
+	uint32 skin = 12;
+}
+
+message PlayerAvatarData {
+	repeated AvatarData avatar_list = 1;
+	uint32 trailblazer_gender = 2;
+	uint32 basic_type = 3;
+	uint32 mar7th_type = 4;
+	repeated uint32 unlock_skin = 5;
+}
+
+message LineupAvatarData {
+	uint32 avatar_id = 1;
+	int32 avatar_type = 2;
+	uint32 slot = 3;
+	uint32 hp = 4;
+	uint32 sp = 5;
+}
+
+message LineupData {
+	repeated LineupAvatarData avatar_lists = 1;
+	uint32 index = 2;
+	uint32 leader_slot = 3;
+	string name = 4;
+	bool is_virtual = 5;
+	uint32 plane_id = 6;
+	int32 extra_lineup_type = 7;
+}
+
+message PlayerLineupData {
+	repeated LineupData lineup_list = 1;
+	uint32 cur_lineup_index = 2;
+	uint32 mp = 3;
+	uint32 mp_max = 4;
+}
+
+message EquipmentData {
+	uint32 unique_id = 1;
+	uint32 tid = 2;
+	uint32 level = 3;
+	uint32 exp = 4;
+	uint32 promotion = 5;
+	uint32 rank = 6;
+	uint32 avatar_id = 7;
+	bool is_protected = 8;
+}
+
+message MaterialData {
+	uint32 tid = 1;
+	uint32 num = 2;
+}
+
+message RelicAffixData {
+	uint32 affix_id = 1;
+	uint32 cnt = 2;
+	uint32 step = 3;
+}
+
+message RelicData {
+	uint32 unique_id = 1;
+	uint32 tid = 2;
+	uint32 level = 3;
+	uint32 exp = 4;
+	uint32 avatar_id = 5;
+	uint32 main_affix_id = 6;
+	repeated RelicAffixData sub_affix_lists = 7;
+	bool is_protected = 8;
+}
+
+message PlayerItemData {
+	uint32 uid_counter = 1;
+	repeated EquipmentData equipment_lists = 2;
+	repeated MaterialData material_lists = 3;
+	repeated RelicData relic_lists = 4;
+}
+
+message VectorData {
+	sint32 x = 1;
+	sint32 y = 2;
+	sint32 z = 3;
+}
+
+message PlayerSceneData {
+	VectorData pos = 1;
+	VectorData rot = 2;
+	uint32 plane_id = 3;
+	uint32 floor_id = 4;
+	uint32 entry_id = 5;
+}
+
+message PlayerData {
+	PlayerBasicData basic_comp_data = 1;
+	PlayerAvatarData avatar_comp_data = 2;
+	PlayerLineupData lineup_comp_data = 3;
+	PlayerItemData item_comp_data = 4;
+	PlayerSceneData scene_comp_data = 5;
+}
