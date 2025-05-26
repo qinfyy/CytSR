@@ -92,7 +92,7 @@ namespace GameServer.Game
                 };
             }
 
-            return new PlayerBasicInfo(); // Return default if no data is available
+            return new PlayerBasicInfo();
         }
 
         public void Save()

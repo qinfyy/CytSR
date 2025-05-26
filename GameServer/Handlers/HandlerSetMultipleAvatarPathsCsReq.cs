@@ -10,7 +10,7 @@ namespace GameServer.Handlers
         {
             var req = NetPacket.GetProto<SetMultipleAvatarPathsCsReq>(packet);
 
-            foreach(var avatarId in req.AvatarIdLists)
+            foreach(var avatarId in req.Feifdegkeaps) //AvatarIdLists
             {
                 session._Player.AvatarMgr.SetAvatarPath(avatarId);
             }

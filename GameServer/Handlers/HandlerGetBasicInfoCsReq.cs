@@ -13,7 +13,7 @@ namespace GameServer.Handlers
                 CurDay = 1,
                 //IsGenderSet = true,
                 Gender = session._Player.Data.AvatarCompData.TrailblazerGender,
-                PlayerSettingInfo = new PlayerSettingInfo(),
+                PlayerSettingInfo = new Djbllokkand(),
                 WeekCocoonFinishedCount = 0,
                 NextRecoverTime = 2281337
             };

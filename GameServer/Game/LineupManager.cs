@@ -129,7 +129,7 @@ namespace GameServer.Game
                 IsVirtual = lineupData.IsVirtual,
                 PlaneId = lineupData.PlaneId,
                 Mp = lineupComp.Mp,
-                MaxMp = lineupComp.MpMax,
+                MpMax = lineupComp.MpMax,
                 LeaderSlot = lineupData.LeaderSlot,
                 ExtraLineupType = (ExtraLineupType)lineupData.ExtraLineupType
             };
@@ -142,7 +142,7 @@ namespace GameServer.Game
                     AvatarType = (AvatarType)avatar.AvatarType,
                     Slot = avatar.Slot,
                     Hp = avatar.Hp,
-                    SpBar = new SpBarInfo { SpCur = 10000, SpMax = 10000 }
+                    Sp = new SpProgress { SpCur = 10000, SpNeed = 10000 }
                 });
             }
 

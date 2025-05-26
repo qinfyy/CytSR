@@ -37,6 +37,8 @@
         Mission = 701,
         RelicSetShowOnly = 801,
         RelicRarityShowOnly = 802,
-        NormalPet = 901
+        NormalPet = 901,
+
+        MatchThreeV2
     }
 }

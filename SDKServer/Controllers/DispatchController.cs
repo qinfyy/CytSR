@@ -23,14 +23,14 @@ namespace SDKServer.Controllers
         [HttpGet("query_dispatch")]
         public IActionResult QueryDispatch()
         {
-            Dispatch dispatchRegion = new Dispatch()
+            GlobalDispatchData dispatchRegion = new GlobalDispatchData()
             {
                 Retcode = 0,
             };
 
             foreach (var region in _settings.DispatchRegionList)
             {
-                var regionEntry = new Proto.RegionInfo()
+                var regionEntry = new Proto.ServerData()
                 {
                     Name = region.Name,
                     Title = region.Tiele,
@@ -38,7 +38,7 @@ namespace SDKServer.Controllers
                     DispatchUrl = region.DispatchUrl,
                 };
 
-                dispatchRegion.RegionLists.Add(regionEntry);
+                dispatchRegion.ServerLists.Add(regionEntry);
             }
 
             MemoryStream stream = new MemoryStream();
@@ -55,6 +55,7 @@ namespace SDKServer.Controllers
         {
             try
             {
+
                 var version = Request.Query["version"].ToString();
 
                 var document = JsonDocument.Parse(System.IO.File.ReadAllText("./hotfix.json"));
@@ -107,7 +108,7 @@ namespace SDKServer.Controllers
                     //UseTcp = true,
                     Ecbfehfpofj = true,
                 };
-            
+
 
                 MemoryStream stream = new MemoryStream();
                 Serializer.Serialize(stream, gateserver);

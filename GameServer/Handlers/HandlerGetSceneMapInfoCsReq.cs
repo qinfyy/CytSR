@@ -20,7 +20,7 @@ namespace GameServer.Handlers
 
             foreach (var fid in req.FloorIdLists)
             {
-                var mazeMap = new SceneMapInfo
+                var mazeMap = new MazeMapData
                 {
                     //EntryId = entry,
                     FloorId = fid,
@@ -36,7 +36,7 @@ namespace GameServer.Handlers
                 }
                 if (mecs.Count == 0)
                 {
-                    rsp.SceneMapInfoes.Add(mazeMap);
+                    rsp.MapLists.Add(mazeMap);
                     continue;
                 }
                 foreach (var excel in mecs)
@@ -45,26 +45,26 @@ namespace GameServer.Handlers
 
                     if (floorInfo == null)
                     {
-                        rsp.SceneMapInfoes.Add(mazeMap);
+                        rsp.MapLists.Add(mazeMap);
                         continue;
                     }
 
-                    mazeMap.ChestLists.Add(new ChestInfo
+                    mazeMap.UnlockedChestLists.Add(new MazeChest
                     {
-                        ExistNum = 1,
-                        ChestType = ChestType.MapInfoChestTypeNormal
+                        TotalAmountList = 1,
+                        MapInfoChestType = MapInfoChestType.MapInfoChestTypeNormal
                     });
 
-                    mazeMap.ChestLists.Add(new ChestInfo
+                    mazeMap.UnlockedChestLists.Add(new MazeChest
                     {
-                        ExistNum = 1,
-                        ChestType = ChestType.MapInfoChestTypePuzzle
+                        TotalAmountList = 1,
+                        MapInfoChestType = MapInfoChestType.MapInfoChestTypePuzzle
                     });
 
-                    mazeMap.ChestLists.Add(new ChestInfo
+                    mazeMap.UnlockedChestLists.Add(new MazeChest
                     {
-                        ExistNum = 1,
-                        ChestType = ChestType.MapInfoChestTypeChallenge
+                        TotalAmountList = 1,
+                        MapInfoChestType = MapInfoChestType.MapInfoChestTypeChallenge
                     });
 
                     foreach (var groupInfo in floorInfo.Groups.Values) // all the icons on the map
@@ -79,11 +79,11 @@ namespace GameServer.Handlers
                     var utl = new List<uint>();
                     foreach (var teleport in floorInfo.CachedTeleports.Values)
                         utl.Add(teleport.MappingInfoID);
-                    mazeMap.UnlockTeleportLists = utl.ToArray();
+                    mazeMap.UnlockedTeleportLists = utl.ToArray();
 
                     foreach (var prop in floorInfo.UnlockedCheckpoints)
                     {
-                        var mazeTeleport = new Ofcaigdhpoh
+                        var mazeTeleport = new MazePropExtraState
                         {
                             GroupId = prop.AnchorGroupID,
                             ConfigId = prop.ID,
@@ -91,12 +91,12 @@ namespace GameServer.Handlers
 
                         };
 
-                        mazeMap.Lmngahfnaons.Add(mazeTeleport);
+                        mazeMap.MazePropExtralStates.Add(mazeTeleport);
                     }
 
                     foreach (var prop in floorInfo.UnlockedCheckpoints)
                     {
-                        var mazeProp = new MazePropState
+                        var mazeProp = new MazeProp
                         {
                             GroupId = prop.AnchorGroupID,
                             ConfigId = prop.ID,
@@ -116,7 +116,7 @@ namespace GameServer.Handlers
                 }
                 mazeMap.LightenSectionLists = lsl.ToArray();
 
-                rsp.SceneMapInfoes.Add(mazeMap);
+                rsp.MapLists.Add(mazeMap);
             }
 
             session.Send(NetPacket.Create(CmdId.CmdGetSceneMapInfoScRsp, rsp));

@@ -25,7 +25,7 @@ namespace GameServer.Handlers
                 var utl = new List<uint>();
                 foreach (var teleport in floorInfo.CachedTeleports)
                     utl.Add(teleport.Value.MappingInfoID);
-                rsp.UnlockTeleportLists = utl.ToArray();
+                rsp.UnlockedTeleportLists = utl.ToArray();
             }
 
             session.Send(NetPacket.Create(CmdId.CmdGetUnlockTeleportScRsp, rsp));

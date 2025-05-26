@@ -33,7 +33,7 @@ namespace GameServer.Game
             UnlockAllAvatarPath();
             avatarComp.Mar7thType = (uint)MultiPathAvatarType.Mar7thKnightType;
             avatarComp.BasicType = (uint)MultiPathAvatarType.GirlShamanType;
-            avatarComp.TrailblazerGender = (uint)Gender.GenderWoman;
+            avatarComp.TrailblazerGender = (uint)GenderType.GenderWoman;
             avatarComp.UnlockSkins = new uint[] { 1100101 };
 
             _Player.Save();
@@ -147,8 +147,6 @@ namespace GameServer.Game
 
         private uint SetRelicUid(uint avatarId, uint relicUid, uint relicSlot)
         {
-            avatarId = avatarId;
-
             var avatarComp = _Player.Data.AvatarCompData;
             var avatar = avatarComp.AvatarLists.FirstOrDefault(a => a.AvatarId == avatarId);
 
@@ -302,7 +300,7 @@ namespace GameServer.Game
                     {
                         avatar.EquipRelicLists.Add(new EquipRelic
                         {
-                            Type = r.Key,
+                            Slot = r.Key,
                             RelicUniqueId = r.Value
                         });
                     }
@@ -334,12 +332,12 @@ namespace GameServer.Game
                     {
                         AvatarId = (MultiPathAvatarType)pi.Key,
                         Rank = pi.Value.Rank,
-                        PathEquipmentId = pi.Value.EquipmentUniqueId,
+                        pathEquipmentId = pi.Value.EquipmentUniqueId,
                         DressedSkinId = pi.Value.Skin
                     };
 
                     foreach (var skill in pi.Value.SkillTreeLists)
-                        proto.MultiPathSkillTrees.Add(new AvatarSkillTree
+                        proto.SkilltreeLists.Add(new AvatarSkillTree
                         {
                             PointId = skill.PointId,
                             Level = skill.Level
@@ -348,7 +346,7 @@ namespace GameServer.Game
                     foreach (var relic in pi.Value.RelicMaps)
                         proto.EquipRelicLists.Add(new EquipRelic
                         {
-                            Type = relic.Key,
+                            Slot = relic.Key,
                             RelicUniqueId = relic.Value
                         });
 
@@ -393,7 +391,7 @@ namespace GameServer.Game
 
             _Player.Session.Send(NetPacket.Create(CmdId.CmdAvatarPathChangedNotify, new AvatarPathChangedNotify
             {
-                CurMultiPathAvatarType = curId,
+                MultiPathAvatarInfo = curId,
                 BaseAvatarId = baseId
             }));
 

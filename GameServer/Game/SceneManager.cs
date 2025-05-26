@@ -13,7 +13,7 @@ public class SceneManager
     public uint GameModeType { get; set; }
     public uint TeleportId { get; set; }
 
-    public List<SceneEntityGroupInfo> EntityGroupList { get; set; } = new();
+    public List<SceneGroupInfo> EntityGroupList { get; set; } = new();
     public Dictionary<uint, SceneEntityInfo> Entities { get; set; } = new();
 
     public SceneManager(Player player)
@@ -82,7 +82,7 @@ public class SceneManager
             if (group.LoadSide == GroupLoadSideEnum.Client || group.OwnerMainMissionID > 0)
                 continue;
 
-            var groupInfo = new SceneEntityGroupInfo { GroupId = groupId };
+            var groupInfo = new SceneGroupInfo { GroupId = groupId };
 
             foreach (PropInfo prop in group.PropList)
             {
@@ -105,7 +105,7 @@ public class SceneManager
                     },
                     Prop = new ScenePropInfo
                     {
-                        PropId = prop.PropID,
+                        PropEntityId = prop.PropID,
                         PropState = prop.MappingInfoID > 0 ? 8 : (prop.State == 0 ? 1 : (uint)prop.State)
                     },
                     EntityId = entityId
@@ -163,7 +163,7 @@ public class SceneManager
                 groupInfo.EntityLists.Add(monsterEntity);
             }
 
-            proto.EntityGroupLists.Add(groupInfo);
+            proto.SceneGroupLists.Add(groupInfo);
         }
 
         uint startGroup = entrance.StartGroupId;
@@ -192,7 +192,7 @@ public class SceneManager
             Rot = new Position(_Player.Data.SceneCompData.Rot).ToProto(),
         };
 
-        var playerGroup = new SceneEntityGroupInfo { State = 0, GroupId = 0 };
+        var playerGroup = new SceneGroupInfo { State = 0, GroupId = 0 };
 
         var curLineup = _Player.Data.LineupCompData.LineupLists
             .FirstOrDefault(l => l.Index == _Player.Data.LineupCompData.CurLineupIndex);
@@ -204,7 +204,7 @@ public class SceneManager
         var leaderAvatarId = curLineup.AvatarLists[(int)leaderSlot].AvatarId;
         proto.LeaderEntityId = leaderAvatarId;
 
-        proto.EntityGroupLists.Add(playerGroup);
+        proto.SceneGroupLists.Add(playerGroup);
 
         var lsl = new List<uint>();
         foreach (uint[] range in new uint[][] { new uint[] { 0, 101 }, new uint[] { 10000, 10099 }, new uint[] { 20000, 20099 }, new uint[] { 30000, 30099 } })
@@ -217,7 +217,7 @@ public class SceneManager
         proto.LightenSectionLists = lsl.ToArray();
 
         foreach (var value in floorInfos.SavedValues)
-                proto.FloorSavedDatas[value.Name] = 2;
+                proto.DynamicValues[value.Name] = 2;
 
         _Player.Data.SceneCompData.EntryId = _Player.Data.SceneCompData.EntryId;
         _Player.Data.SceneCompData.PlaneId = entrance.PlaneId;

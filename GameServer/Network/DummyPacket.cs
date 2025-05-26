@@ -102,7 +102,6 @@ namespace GameServer.Network
             { CmdId.CmdGetAssistHistoryCsReq, CmdId.CmdGetAssistHistoryScRsp },
             { CmdId.CmdGetPlayerDetailInfoCsReq, CmdId.CmdGetPlayerDetailInfoScRsp },
             { CmdId.CmdGetEraFlipperDataCsReq, CmdId.CmdGetEraFlipperDataScRsp },
-            { CmdId.CmdGetPreAvatarListCsReq, CmdId.CmdGetPreAvatarListScRsp },
             { CmdId.CmdRelicSmartWearGetPlanCsReq, CmdId.CmdRelicSmartWearGetPlanScRsp },
             { CmdId.CmdRelicSmartWearGetPinRelicCsReq, CmdId.CmdRelicSmartWearGetPinRelicScRsp },
             { CmdId.CmdSetGrowthTargetAvatarCsReq, CmdId.CmdSetGrowthTargetAvatarScRsp },

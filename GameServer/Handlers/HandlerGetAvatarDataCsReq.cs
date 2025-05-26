@@ -1,5 +1,4 @@
 ﻿using Proto;
-using GameServer.Resources;
 using GameServer.Network;
 
 namespace GameServer.Handlers
@@ -14,13 +13,23 @@ namespace GameServer.Handlers
             var rsp = new GetAvatarDataScRsp()
             {
                 Retcode = 0,
-                IsGetAll = req.IsGetAll,
+                IsAll = req.IsGetAll,
             };
 
             var al = session._Player.AvatarMgr.GetAvatarListProto();
             foreach (var a in al)
             {
                 rsp.AvatarLists.Add(a);
+            }
+
+            foreach (var entry in session._Player.AvatarMgr.GetAvatarPathProto())
+            {
+                rsp.MultiPathAvatarInfoLists.Add(entry);
+            }
+
+            foreach (var cap in session._Player.AvatarMgr.GetCurAvatarPathProto())
+            {
+                rsp.CurMultiPathAvatarTypeMaps.Add(cap.Key, cap.Value);
             }
 
             rsp.SkinLists = session._Player.Data.AvatarCompData.UnlockSkins;

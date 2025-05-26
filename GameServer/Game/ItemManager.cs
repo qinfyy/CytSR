@@ -183,14 +183,14 @@ namespace GameServer.Game
 
             return itemComp.EquipmentLists.Select(e => new Equipment
             {
-                Tid = e.Tid,
+                Id = e.Tid,
                 UniqueId = e.UniqueId,
                 Level = e.Level,
                 Exp = e.Exp,
                 Promotion = e.Promotion,
                 Rank = e.Rank,
                 IsProtected = e.IsProtected,
-                EquipAvatarId = e.AvatarId,
+                CharId = e.AvatarId,
                 //BaseAvatarId = e.AvatarId > 8000 ? 8001 : e.AvatarId
             }).ToList();
         }
@@ -201,7 +201,7 @@ namespace GameServer.Game
 
             return itemComp.MaterialLists.Select(m => new Material
             {
-                Tid = m.Tid,
+                Id = m.Tid,
                 Num = m.Num
             }).ToList();
         }
@@ -217,12 +217,12 @@ namespace GameServer.Game
                 Relic relic = new Relic
                 {
                     MainAffixId = r.MainAffixId,
-                    EquipAvatarId = r.AvatarId,
+                    CharId = r.AvatarId,
                     UniqueId = r.UniqueId,
                     IsProtected = r.IsProtected,
                     Level = r.Level,
                     Exp = r.Exp,
-                    Tid = r.Tid
+                    Id = r.Tid
                 };
 
                 foreach (var s in r.SubAffixLists)

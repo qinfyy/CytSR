@@ -25,7 +25,7 @@ namespace GameServer.Handlers
 
             var enterSceneByServer = new EnterSceneByServerScNotify
             {
-                Reason = EnterSceneReason.EnterSceneReasonNone,
+                Alifpihnmek = Oihaiigdcik.EnterSceneReasonNone, //EnterSceneReason
                 Scene = session._Player.SceneMgr.Load(),
                 Lineup = session._Player.LineupMgr.GetCurLineupProto(),
             };
@@ -34,18 +34,6 @@ namespace GameServer.Handlers
 
             session.Send(NetPacket.Create(CmdId.CmdEnterSceneByServerScNotify, enterSceneByServer));
             
-            var moveNotify = new SceneEntityMoveScNotify
-            {
-                EntryId = session._Player.Data.SceneCompData.EntryId,
-                Motion = new MotionInfo()
-                {
-                    Pos = new Position(session._Player.Data.SceneCompData.Pos).ToProto(),
-                    Rot = new Position(session._Player.Data.SceneCompData.Rot).ToProto()
-                }
-            };
-
-            //session.Send(NetPacket.Create(CmdId.CmdSceneEntityMoveScNotify, moveNotify));
-
             session.Send(NetPacket.Create(CmdId.CmdEnterSceneScRsp));
         }
     }
