@@ -33,8 +33,8 @@ namespace GameServer.Game
             UnlockAllAvatarPath();
             avatarComp.Mar7thType = (uint)MultiPathAvatarType.Mar7thKnightType;
             avatarComp.BasicType = (uint)MultiPathAvatarType.GirlShamanType;
-            avatarComp.TrailblazerGender = (uint)GenderType.GenderWoman;
-            avatarComp.UnlockSkins = new uint[] { 1100101 };
+            avatarComp.TrailblazerGender = (uint)Gender.Woman;
+            avatarComp.UnlockSkins = new uint[] { 1100101, 1131001 };
 
             _Player.Save();
         }
@@ -283,7 +283,7 @@ namespace GameServer.Game
                         Promotion = a.Promotion,
                         Rank = a.Rank,
                         EquipmentUniqueId = a.EquipmentUniqueId,
-                        FirstMetTimeStamp = a.FirstMetTimeStamp,
+                        FirstMetTimestamp = a.FirstMetTimeStamp,
                         DressedSkinId = a.Skin
                     };
 
@@ -300,13 +300,16 @@ namespace GameServer.Game
                     {
                         avatar.EquipRelicLists.Add(new EquipRelic
                         {
-                            Slot = r.Key,
+                            Type = r.Key,
                             RelicUniqueId = r.Value
                         });
                     }
 
                     if (avatar.BaseAvatarId == 1001)
                         avatar.DressedSkinId = 1100101;
+
+                    if (avatar.BaseAvatarId == 1310)
+                        avatar.DressedSkinId = 1131001;
 
                     avatarList.Add(avatar);
                 }
@@ -316,10 +319,10 @@ namespace GameServer.Game
 
         }
 
-        public List<MultiPathAvatarInfo> GetAvatarPathProto()
+        public List<MultiPathAvatarTypeInfo> GetAvatarPathProto()
         {
             var avatarComp = _Player.Data.AvatarCompData;
-            var res = new List<MultiPathAvatarInfo>();
+            var res = new List<MultiPathAvatarTypeInfo>();
 
             foreach (var avatar in avatarComp.AvatarLists)
             {
@@ -328,11 +331,11 @@ namespace GameServer.Game
 
                 foreach (var pi in avatar.PathInfoes)
                 {
-                    var proto = new MultiPathAvatarInfo
+                    var proto = new MultiPathAvatarTypeInfo
                     {
                         AvatarId = (MultiPathAvatarType)pi.Key,
                         Rank = pi.Value.Rank,
-                        pathEquipmentId = pi.Value.EquipmentUniqueId,
+                        PathEquipmentId = pi.Value.EquipmentUniqueId,
                         DressedSkinId = pi.Value.Skin
                     };
 
@@ -346,7 +349,7 @@ namespace GameServer.Game
                     foreach (var relic in pi.Value.RelicMaps)
                         proto.EquipRelicLists.Add(new EquipRelic
                         {
-                            Slot = relic.Key,
+                            Type = relic.Key,
                             RelicUniqueId = relic.Value
                         });
 
@@ -391,7 +394,7 @@ namespace GameServer.Game
 
             _Player.Session.Send(NetPacket.Create(CmdId.CmdAvatarPathChangedNotify, new AvatarPathChangedNotify
             {
-                MultiPathAvatarInfo = curId,
+                CurMultiPathAvatarType = curId,
                 BaseAvatarId = baseId
             }));
 

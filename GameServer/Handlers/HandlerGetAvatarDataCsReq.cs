@@ -13,7 +13,7 @@ namespace GameServer.Handlers
             var rsp = new GetAvatarDataScRsp()
             {
                 Retcode = 0,
-                IsAll = req.IsGetAll,
+                IsGetAll = req.IsGetAll,
             };
 
             var al = session._Player.AvatarMgr.GetAvatarListProto();
@@ -24,15 +24,15 @@ namespace GameServer.Handlers
 
             foreach (var entry in session._Player.AvatarMgr.GetAvatarPathProto())
             {
-                rsp.MultiPathAvatarInfoLists.Add(entry);
+                rsp.MultiPathAvatarTypeInfoLists.Add(entry);
             }
 
             foreach (var cap in session._Player.AvatarMgr.GetCurAvatarPathProto())
             {
-                rsp.CurMultiPathAvatarTypeMaps.Add(cap.Key, cap.Value);
+                rsp.CurrentMultiPathAvatarIds.Add(cap.Key, cap.Value);
             }
 
-            rsp.SkinLists = session._Player.Data.AvatarCompData.UnlockSkins;
+            rsp.OwnedSkinIdLists = session._Player.Data.AvatarCompData.UnlockSkins;
 
             session.Send(NetPacket.Create(CmdId.CmdGetAvatarDataScRsp, rsp));
         }

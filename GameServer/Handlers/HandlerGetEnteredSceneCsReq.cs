@@ -19,13 +19,13 @@ namespace GameServer.Handlers
             {
                 if (mapEntranceExcel.FinishMainMissionIdList.Count != 0 || mapEntranceExcel.FinishMainMissionIdList.Count != 0)
                 {
-                    var enteredSceneInfo = new GroupStateChangeScNotify
+                    var enteredSceneInfo = new EnteredSceneInfo
                     {
                         FloorId = mapEntranceExcel.FloorId,
                         PlaneId = mapEntranceExcel.PlaneId
                     };
                     
-                    rsp.EnterSceneInfoes.Add(enteredSceneInfo);
+                    rsp.EnteredSceneInfoes.Add(enteredSceneInfo);
                 }
             }
             session.Send(NetPacket.Create(CmdId.CmdGetEnteredSceneScRsp, rsp));

@@ -23,17 +23,17 @@ namespace GameServer.Handlers
             var cpgdsr = new ContentPackageGetDataScRsp()
             {
                 Retcode = 0,
-                Data = new ContentPackageData()
+                Data = new PackageData()
             };
 
             foreach (var item in GameData.ContentPackageConfigData)
             {
-                var cpi = new ContentPackageInfo
+                var cpi = new ContentInfo
                 {
                     ContentId = item.Key,
-                    Status = ContentPackageStatus.ContentPackageStatusFinished
+                    Status = ContentPackageStatus.Finished
                 };
-                cpgdsr.Data.ContentPackageLists.Add(cpi);
+                cpgdsr.Data.InfoLists.Add(cpi);
             }
 
             session.Send(NetPacket.Create(CmdId.CmdPlayerLoginScRsp, rsp));

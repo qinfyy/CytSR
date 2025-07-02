@@ -54,5 +54,13 @@
     "ifixUrl": "https://autopatchcn.bhsr.com/ifix/BetaLive/output_10429797_be4a832b1c47_f58faff155c2c4",
     "customMdkResVersion": 0,
     "customIfixVersion": 0
+  },
+  "CNBETAWin3.4.51": {
+    "assetBundleUrl": "https://autopatchcn.bhsr.com/asb/BetaLive/output_10872416_669962a46b92_09917141f19737",
+    "exResourceUrl": "https://autopatchcn.bhsr.com/design_data/BetaLive/output_10903234_5a8370c0b73e_2d25a979196dce",
+    "luaUrl": "https://autopatchcn.bhsr.com/lua/BetaLive/output_10872485_88661d25b99c_8af3232d484baf",
+    "ifixUrl": "https://autopatchcn.bhsr.com/ifix/BetaLive/output_10894308_758b6d45fde6_ac9089c9b1e0a0",
+    "customMdkResVersion": 0,
+    "customIfixVersion": 0
   }
 }

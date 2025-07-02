@@ -7,7 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Proto\StarRail.proto" />
+    <None Remove="ServerProto\PlayerData.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="Proto\StarRail.proto" />
+    <AdditionalFiles Include="ServerProto\PlayerData.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="protobuf-net" Version="3.2.52" />
+    <PackageReference Include="protobuf-net.BuildTools" Version="3.2.52">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>

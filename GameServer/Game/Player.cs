@@ -120,7 +120,7 @@ namespace GameServer.Game
 
             foreach (var mpai in AvatarMgr.GetAvatarPathProto())
             {
-                rsp.MultiPathAvatarInfoLists.Add(mpai);
+                rsp.MultiPathAvatarTypeInfoLists.Add(mpai);
             }
 
             Session.Send(NetPacket.Create(CmdId.CmdPlayerSyncScNotify, rsp));

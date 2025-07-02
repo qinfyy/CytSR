@@ -9,7 +9,7 @@ namespace GameServer.Game
     {
         public static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
-        private static readonly uint[] DEFAULT_LINEUP = new uint[4] { 8001, 1001, 1310, 0 };
+        private static readonly uint[] DEFAULT_LINEUP = new uint[4] { 8001, 1412, 1410, 1310 };
 
         private readonly Player _Player;
 
@@ -104,7 +104,7 @@ namespace GameServer.Game
         {
             var sln = new SyncLineupNotify();
             sln.Lineup = GetCurLineupProto();
-            sln.ReasonLists.Add(SyncLineupReason.SyncReasonNone);
+            sln.ReasonLists.Add(SyncReason.None);
 
             session.Send(NetPacket.Create(CmdId.CmdSyncLineupNotify, sln));
         }
@@ -129,7 +129,7 @@ namespace GameServer.Game
                 IsVirtual = lineupData.IsVirtual,
                 PlaneId = lineupData.PlaneId,
                 Mp = lineupComp.Mp,
-                MpMax = lineupComp.MpMax,
+                MaxMp = lineupComp.MpMax,
                 LeaderSlot = lineupData.LeaderSlot,
                 ExtraLineupType = (ExtraLineupType)lineupData.ExtraLineupType
             };
@@ -142,7 +142,7 @@ namespace GameServer.Game
                     AvatarType = (AvatarType)avatar.AvatarType,
                     Slot = avatar.Slot,
                     Hp = avatar.Hp,
-                    Sp = new SpProgress { SpCur = 10000, SpNeed = 10000 }
+                    SpBar = new SpBarInfo { CurSp = 10000, MaxSp = 10000 }
                 });
             }
 

@@ -25,7 +25,7 @@ namespace GameServer.Handlers
 
             var enterSceneByServer = new EnterSceneByServerScNotify
             {
-                Alifpihnmek = Oihaiigdcik.EnterSceneReasonNone, //EnterSceneReason
+                Reason = EnterSceneReason.None, //EnterSceneReason
                 Scene = session._Player.SceneMgr.Load(),
                 Lineup = session._Player.LineupMgr.GetCurLineupProto(),
             };

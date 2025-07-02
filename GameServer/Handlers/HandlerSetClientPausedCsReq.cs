@@ -12,7 +12,7 @@ namespace GameServer.Handlers
 
             var rsp = new SetClientPausedCsReq()
             {
-                IsPaused = req.IsPaused
+                Paused = req.Paused
             };
 
             session.Send(NetPacket.Create(CmdId.CmdSetClientPausedScRsp, rsp));

@@ -52,19 +52,19 @@ namespace GameServer.Handlers
                     mazeMap.UnlockedChestLists.Add(new MazeChest
                     {
                         TotalAmountList = 1,
-                        MapInfoChestType = MapInfoChestType.MapInfoChestTypeNormal
+                        MapInfoChestType = MapInfoChestType.Normal
                     });
 
                     mazeMap.UnlockedChestLists.Add(new MazeChest
                     {
                         TotalAmountList = 1,
-                        MapInfoChestType = MapInfoChestType.MapInfoChestTypePuzzle
+                        MapInfoChestType = MapInfoChestType.Puzzle
                     });
 
                     mazeMap.UnlockedChestLists.Add(new MazeChest
                     {
                         TotalAmountList = 1,
-                        MapInfoChestType = MapInfoChestType.MapInfoChestTypeChallenge
+                        MapInfoChestType = MapInfoChestType.Challenge
                     });
 
                     foreach (var groupInfo in floorInfo.Groups.Values) // all the icons on the map
@@ -83,7 +83,7 @@ namespace GameServer.Handlers
 
                     foreach (var prop in floorInfo.UnlockedCheckpoints)
                     {
-                        var mazeTeleport = new MazePropExtraState
+                        var mazeTeleport = new Ofcaigdhpoh
                         {
                             GroupId = prop.AnchorGroupID,
                             ConfigId = prop.ID,
@@ -91,7 +91,7 @@ namespace GameServer.Handlers
 
                         };
 
-                        mazeMap.MazePropExtralStates.Add(mazeTeleport);
+                        mazeMap.Lmngahfnaons.Add(mazeTeleport);
                     }
 
                     foreach (var prop in floorInfo.UnlockedCheckpoints)

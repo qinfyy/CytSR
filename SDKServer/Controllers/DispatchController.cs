@@ -23,14 +23,14 @@ namespace SDKServer.Controllers
         [HttpGet("query_dispatch")]
         public IActionResult QueryDispatch()
         {
-            GlobalDispatchData dispatchRegion = new GlobalDispatchData()
+            DispatchRegionData dispatchRegion = new DispatchRegionData()
             {
                 Retcode = 0,
             };
 
             foreach (var region in _settings.DispatchRegionList)
             {
-                var regionEntry = new Proto.ServerData()
+                var regionEntry = new Proto.RegionEntry()
                 {
                     Name = region.Name,
                     Title = region.Tiele,
@@ -38,7 +38,7 @@ namespace SDKServer.Controllers
                     DispatchUrl = region.DispatchUrl,
                 };
 
-                dispatchRegion.ServerLists.Add(regionEntry);
+                dispatchRegion.RegionLists.Add(regionEntry);
             }
 
             MemoryStream stream = new MemoryStream();

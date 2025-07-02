@@ -9,7 +9,7 @@ namespace GameServer.Handlers
         public void Handle(GameSession session, NetPacket packet)
         {
             var req = NetPacket.GetProto<ReplaceLineupCsReq>(packet);
-            session._Player.LineupMgr.ReplaceLineup(req.Index, req.LeaderSlot, req.ReplaceSlotLists);
+            session._Player.LineupMgr.ReplaceLineup(req.Index, req.LeaderSlot, req.Slots);
 
             // 同步当前阵容
             session._Player.LineupMgr.SyncCurLineup(session);
